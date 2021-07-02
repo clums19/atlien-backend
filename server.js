@@ -130,6 +130,48 @@ app.get('/attractions', async(req, res) => {
     }
 });
 
+// Delete
+// ------------------------------------------
+app.delete('/food', async(req, res) => {
+    try {
+        res.json(await Food.findByIdAndRemove(req.params.id));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+app.delete('/bars', async(req, res) => {
+    try {
+        res.json(await Bar.findByIdAndRemove(req.params.id));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+app.delete('/clubs', async(req, res) => {
+    try {
+        res.json(await Club.findByIdAndRemove(req.params.id));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+app.delete('/parks', async(req, res) => {
+    try {
+        res.json(await Park.findByIdAndRemove(req.params.id));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+app.delete('/attractions', async(req, res) => {
+    try {
+        res.json(await Attraction.findByIdAndRemove(req.params.id));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+
+// Update
+// ------------------------------------------
+
+
 // Create
 // ------------------------------------------
 app.post('/food', async(req, res) => {
