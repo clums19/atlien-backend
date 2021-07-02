@@ -51,6 +51,28 @@ const ClubSchema = new mongoose.Schema({
 })
 const Club = mongoose.model('Club', ClubSchema);
 
+const ParkSchema = new mongoose.Schema({
+    title: String,
+    image: String,
+    description: String,
+    distance: String,
+    web: String,
+    category: String,
+
+})
+const Park = mongoose.model('Park', ParkSchema);
+
+const AttractionSchema = new mongoose.Schema({
+    title: String,
+    image: String,
+    description: String,
+    distance: String,
+    web: String,
+    category: String,
+
+})
+const Attraction = mongoose.model('Attraction', AttractionSchema);
+
 mongoose.connection
     .on("open", () => console.log("You are connected to mongoose"))
     .on("close", () => console.log("You are disconnected from mongoose"))
@@ -93,6 +115,20 @@ app.get('/clubs', async(req, res) => {
         res.status(400).json(error);
     }
 });
+app.get('/parks', async(req, res) => {
+    try {
+        res.json(await Park.find({}));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+app.get('/attractions', async(req, res) => {
+    try {
+        res.json(await Attraction.find({}));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
 
 // Create
 // ------------------------------------------
@@ -113,6 +149,20 @@ app.post('/bars', async(req, res) => {
 app.post('/clubs', async(req, res) => {
     try {
         res.json(await Club.create(req.body));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+app.post('/parks', async(req, res) => {
+    try {
+        res.json(await Park.create(req.body));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+app.post('/attractions', async(req, res) => {
+    try {
+        res.json(await Attraction.create(req.body));
     } catch (error) {
         res.status(400).json(error);
     }
