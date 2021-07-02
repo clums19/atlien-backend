@@ -132,35 +132,35 @@ app.get('/attractions', async(req, res) => {
 
 // Delete
 // ------------------------------------------
-app.delete('/food', async(req, res) => {
+app.delete('/food/:id', async(req, res) => {
     try {
         res.json(await Food.findByIdAndRemove(req.params.id));
     } catch (error) {
         res.status(400).json(error);
     }
 });
-app.delete('/bars', async(req, res) => {
+app.delete('/bars/:id', async(req, res) => {
     try {
         res.json(await Bar.findByIdAndRemove(req.params.id));
     } catch (error) {
         res.status(400).json(error);
     }
 });
-app.delete('/clubs', async(req, res) => {
+app.delete('/clubs/:id', async(req, res) => {
     try {
         res.json(await Club.findByIdAndRemove(req.params.id));
     } catch (error) {
         res.status(400).json(error);
     }
 });
-app.delete('/parks', async(req, res) => {
+app.delete('/parks/:id', async(req, res) => {
     try {
         res.json(await Park.findByIdAndRemove(req.params.id));
     } catch (error) {
         res.status(400).json(error);
     }
 });
-app.delete('/attractions', async(req, res) => {
+app.delete('/attractions/:id', async(req, res) => {
     try {
         res.json(await Attraction.findByIdAndRemove(req.params.id));
     } catch (error) {
@@ -170,7 +170,51 @@ app.delete('/attractions', async(req, res) => {
 
 // Update
 // ------------------------------------------
-
+app.put('/food/:id', async(req, res) => {
+    try {
+        res.json(
+            await Food.findByIdAndUpdate(req.params.id, req.body, {new:true})
+        ); 
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+app.put('/bars/:id', async(req, res) => {
+    try {
+        res.json(
+            await Bar.findByIdAndUpdate(req.params.id, req.body, {new:true})
+        ); 
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+app.put('/clubs/:id', async(req, res) => {
+    try {
+        res.json(
+            await Club.findByIdAndUpdate(req.params.id, req.body, {new:true})
+        ); 
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+app.put('/parks/:id', async(req, res) => {
+    try {
+        res.json(
+            await Park.findByIdAndUpdate(req.params.id, req.body, {new:true})
+        ); 
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+app.put('/attractions/:id', async(req, res) => {
+    try {
+        res.json(
+            await Attraction.findByIdAndUpdate(req.params.id, req.body, {new:true})
+        ); 
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
 
 // Create
 // ------------------------------------------
