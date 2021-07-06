@@ -18,27 +18,9 @@ mongoose.connect(MONGODB_URL, {
 
 // Models
 // ----------------------------------
-const FoodSchema = new mongoose.Schema({
-    title: String,
-    image: String,
-    description: String,
-    distance: String,
-    web: String,
-    category: String,
 
-})
-const Food = mongoose.model('Food', FoodSchema);
 
-const BarSchema = new mongoose.Schema({
-    title: String,
-    image: String,
-    description: String,
-    distance: String,
-    web: String,
-    category: String,
 
-})
-const Bar = mongoose.model('Bar', BarSchema);
 
 const ClubSchema = new mongoose.Schema({
     title: String,
@@ -84,6 +66,9 @@ mongoose.connection
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
+app.use('/foods', require('./controllers/foods'));
+app.use('/bars', require('./controllers/bars'));
+
 
 // Routes
 // ----------------------------------
@@ -94,20 +79,8 @@ app.get('/', (req, res) => {
 
 // Index
 // ------------------------------------
-app.get('/food', async(req, res) => {
-    try {
-        res.json(await Food.find({}));
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
-app.get('/bars', async(req, res) => {
-    try {
-        res.json(await Bar.find({}));
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
+
+
 app.get('/clubs', async(req, res) => {
     try {
         res.json(await Club.find({}));
@@ -132,20 +105,8 @@ app.get('/attractions', async(req, res) => {
 
 // Delete
 // ------------------------------------------
-app.delete('/food/:id', async(req, res) => {
-    try {
-        res.json(await Food.findByIdAndRemove(req.params.id));
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
-app.delete('/bars/:id', async(req, res) => {
-    try {
-        res.json(await Bar.findByIdAndRemove(req.params.id));
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
+
+
 app.delete('/clubs/:id', async(req, res) => {
     try {
         res.json(await Club.findByIdAndRemove(req.params.id));
@@ -170,24 +131,8 @@ app.delete('/attractions/:id', async(req, res) => {
 
 // Update
 // ------------------------------------------
-app.put('/food/:id', async(req, res) => {
-    try {
-        res.json(
-            await Food.findByIdAndUpdate(req.params.id, req.body, {new:true})
-        ); 
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
-app.put('/bars/:id', async(req, res) => {
-    try {
-        res.json(
-            await Bar.findByIdAndUpdate(req.params.id, req.body, {new:true})
-        ); 
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
+
+
 app.put('/clubs/:id', async(req, res) => {
     try {
         res.json(
@@ -218,20 +163,8 @@ app.put('/attractions/:id', async(req, res) => {
 
 // Create
 // ------------------------------------------
-app.post('/food', async(req, res) => {
-    try {
-        res.json(await Food.create(req.body));
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
-app.post('/bars', async(req, res) => {
-    try {
-        res.json(await Bar.create(req.body));
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
+
+
 app.post('/clubs', async(req, res) => {
     try {
         res.json(await Club.create(req.body));
