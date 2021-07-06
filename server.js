@@ -19,20 +19,6 @@ mongoose.connect(MONGODB_URL, {
 // Models
 // ----------------------------------
 
-
-
-
-const ClubSchema = new mongoose.Schema({
-    title: String,
-    image: String,
-    description: String,
-    distance: String,
-    web: String,
-    category: String,
-
-})
-const Club = mongoose.model('Club', ClubSchema);
-
 const ParkSchema = new mongoose.Schema({
     title: String,
     image: String,
@@ -68,6 +54,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use('/foods', require('./controllers/foods'));
 app.use('/bars', require('./controllers/bars'));
+app.use('/clubs', require('./controllers/clubs'));
+
 
 
 // Routes
@@ -81,13 +69,7 @@ app.get('/', (req, res) => {
 // ------------------------------------
 
 
-app.get('/clubs', async(req, res) => {
-    try {
-        res.json(await Club.find({}));
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
+
 app.get('/parks', async(req, res) => {
     try {
         res.json(await Park.find({}));
@@ -107,13 +89,7 @@ app.get('/attractions', async(req, res) => {
 // ------------------------------------------
 
 
-app.delete('/clubs/:id', async(req, res) => {
-    try {
-        res.json(await Club.findByIdAndRemove(req.params.id));
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
+
 app.delete('/parks/:id', async(req, res) => {
     try {
         res.json(await Park.findByIdAndRemove(req.params.id));
@@ -133,15 +109,7 @@ app.delete('/attractions/:id', async(req, res) => {
 // ------------------------------------------
 
 
-app.put('/clubs/:id', async(req, res) => {
-    try {
-        res.json(
-            await Club.findByIdAndUpdate(req.params.id, req.body, {new:true})
-        ); 
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
+
 app.put('/parks/:id', async(req, res) => {
     try {
         res.json(
@@ -165,13 +133,7 @@ app.put('/attractions/:id', async(req, res) => {
 // ------------------------------------------
 
 
-app.post('/clubs', async(req, res) => {
-    try {
-        res.json(await Club.create(req.body));
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
+
 app.post('/parks', async(req, res) => {
     try {
         res.json(await Park.create(req.body));

@@ -12,7 +12,7 @@ foodRouter.get('/', async(req, res) => {
 });
 
 // Delete
-foodRouter.delete('//:id', async(req, res) => {
+foodRouter.delete('/:id', async(req, res) => {
     try {
         res.json(await Food.findByIdAndRemove(req.params.id));
     } catch (error) {
@@ -21,7 +21,7 @@ foodRouter.delete('//:id', async(req, res) => {
 });
 
 // Update 
-foodRouter.put('//:id', async(req, res) => {
+foodRouter.put('/:id', async(req, res) => {
     try {
         res.json(
             await Food.findByIdAndUpdate(req.params.id, req.body, {new:true})

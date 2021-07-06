@@ -12,7 +12,7 @@ barRouter.get('/', async(req, res) => {
 });
 
 // Delete
-barRouter.delete('//:id', async(req, res) => {
+barRouter.delete('/:id', async(req, res) => {
     try {
         res.json(await Bar.findByIdAndRemove(req.params.id));
     } catch (error) {
@@ -21,7 +21,7 @@ barRouter.delete('//:id', async(req, res) => {
 });
 
 // Update
-barRouter.put('//:id', async(req, res) => {
+barRouter.put('/:id', async(req, res) => {
     try {
         res.json(
             await Bar.findByIdAndUpdate(req.params.id, req.body, {new:true})
